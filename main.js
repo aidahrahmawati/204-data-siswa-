@@ -18,5 +18,32 @@ const firebaseConfig = {
   messagingSenderId: "630693962922",
   appId: "1:630693962922:web:a9447f760b858bcf781cd3"
 };
+if (true) {
+  
+}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-const app = initializeApp(firebaseConfig); did
+export async function ambilDaftarSiswa () {
+  const siswaRef = collection(db, "siswa");
+  const q = query(siswaRef, orderBy("nama"));
+  const querySnapshot = await getDocs(q);
+  
+  let retval = [];
+  querySnapshot.forEach((doc) => {
+    retval.push({ id: doc.id, nama: doc.data().nama });
+  });
+  
+  return retval;
+}
+
+export async function tambahSiswa(val) {
+  try {
+    const docRef = await addDoc(collection(db, "siswa"), {
+      nama: val
+    });
+    console.log('berhasil: ' + docRef.id);
+  } catch (e) {
+    console.log('Error menambah dokumen:' + e);
+  }
+}

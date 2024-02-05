@@ -14,6 +14,24 @@
   <h1>daftar siswa</h1>
   
   <a href="index.html">form tambah siswa</a>
+  
+   <script type="module">
+    import { tambahSiswa} from './main.js';
+    
+    $(document). ready(async function() {
+      let elemenNamaSiswa = $('#daftar-siswa');
+      let daftarSiswa = await ambilDataSiswa();
+      
+      daftarSiswa.forEach((data) => {
+        elemenNamaSiswa.append(
+          '<li>' +
+          data.nama
+          '</li>'
+          );
+      });
+    });
+   
+ </script>
 </body>
 
 </html>
