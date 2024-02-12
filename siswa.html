@@ -16,20 +16,22 @@
 <body class="m-4">
   <h1>daftar siswa</h1>
   
-  <ul id="daftar-siswa"></ul>
+  <ul id="daftar-siswa" class="list-group"></ul>
   
   <a href="index.html" class="mt-1">from tambah siswa</a>
   
    <script type="module">
-    import { ambilDaftarSiswa } from "./main.js";
+    import { ambilDaftarSiswa, hapusSiswa } from "./main.js";
+    
     $(document).ready(async function() {
       let elemenNamaSiswa = $('#daftar-siswa');
       let daftarSiswa = await ambilDaftarSiswa();
       
       daftarSiswa.forEach((data) => {
         elemenNamaSiswa.append(
-          '<li>' +
+          '<li class="list-group-item">' +
           data.nama +
+          ' <button class="btn btn-danger tombol-hapus">Hapus</button>'
           '</li>'
           );
       });
